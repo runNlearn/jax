@@ -1,0 +1,5 @@
+# notebook checkpoint
+.ipynb_checkpoints/
+
+# python cache
+__pycache__/
