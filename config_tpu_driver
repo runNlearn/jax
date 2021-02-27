@@ -1,0 +1,29 @@
+#!/usr/bin/python3
+
+import sys
+
+from cloud_tpu_client import Client
+
+def set_tpu_driver_version(target):
+  if target[1] == 'tf':
+    tpu_driver_version = '2.4.1'
+  elif target[1] == 'jax':
+    tpu_driver_version = 'tpu_driver0.1-dev20200320'
+  else:
+    print('[ERROR] Wrong choice')
+    return
+
+  try:
+    c = Client(target[0])
+  except:
+    print('[ERROR] Wrong TPU_NAME')
+    return
+  c.configure_tpu_version(tpu_driver_version, restart_type='ifNeeded')
+  c.wait_for_healthy()
+
+if __name__ == '__main__':
+  inputs = sys.argv
+  if len(inputs) != 3:
+    print('Please give your target: TPU_NAME and software(tf or jax)')
+  else:
+    set_tpu_driver_version(inputs[1:])
