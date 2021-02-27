@@ -6,7 +6,7 @@ from cloud_tpu_client import Client
 
 def set_tpu_driver_version(target):
   if target[1] == 'tf':
-    tpu_driver_version = '2.4.1'
+    tpu_driver_version = '2.3.1'
   elif target[1] == 'jax':
     tpu_driver_version = 'tpu_driver0.1-dev20200320'
   else:
